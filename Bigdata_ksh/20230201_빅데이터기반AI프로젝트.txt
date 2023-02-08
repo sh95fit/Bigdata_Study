@@ -1,0 +1,29 @@
+20230201_Bigdata
+
+* 함수(define)
+
+- * : * 기준 우측에 있는 값을 keyword_only(매개변수=값) 형태로만 받음
+- / : / 기준 좌측에 있는 값을 pogitional_only(값) 형태로만 받음
+
+* 가변적인 매개변수
+- *arg -> 매개변수 개수가 정해져 있지 않음 => 튜플 형태로 반환
+- *kwarg -> 매개변수 개수가 정해져 있지 않음 => 딕셔너리 형태로 반환
+
+
+* 파일 I/O
+
+open 함수 활용
+열면 바로 close()를 해주어야 한다
+혹은 with를 활용해서 열면 close()가 자동으로 적용된다
+
+# 파일 확장자 종류
+# csv : comma separated values
+# tsv : tab separated values
+
+# 인코딩 방식
+- 기본 : utf-8
+- 적용이 안 되는 경우 : cp949
+
+발생 에러
+'utf-8' codec can't decode byte 0xb3 in position 0: invalid start byte
+한글을 인식하지 못해 발생 -> cp949로 인코딩해서 활용
