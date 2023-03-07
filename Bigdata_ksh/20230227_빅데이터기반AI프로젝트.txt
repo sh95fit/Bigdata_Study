@@ -43,14 +43,15 @@
 
 ------------------------------------------------
 
- -------------------column (=Feature) (=Attribute) 
-ㅣ                    (column의 개수 : dimension, degree)
+ -------------------Axis 1 column (=Feature) (=Attribute) 
+ㅣ                         (column의 개수 : dimension, degree)
 ㅣ
 ㅣ
 ㅣ
 ㅣ
 ㅣ
+Axis0
 row (= sample) (= tuple)
-(row의 개수 : cardinality)
+(row의 개수 : cardinality, Samples)
 
 
