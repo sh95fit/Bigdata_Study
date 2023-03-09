@@ -1,0 +1,28 @@
+20230308_Bigdata
+
+* Numpy (Scipy, Statmodels)
+
+ - Universal Functions
+  * 종류
+  numpy.add
+  ex> np.add.reduce - 축에 따라 차원을 1로 만듦
+     - where = 불리언 함수   형태로 조건을 줄 수 있다!
+  .reduce - 축에 따라 차원을 1로 만듦
+  .accumulate - 누적
+  .reduceat - 구간을 나눠 차원을 줄임
+  .at - 지정 영역에 주어진 배열과 연산 처리
+  .outer - 크로스 연산
+
+Tip!
+uci machine learning repository
+-> iris 데이터 등 다양한 데이터 존재
+
+
+- 회귀선 탐색
+  ex> y = ax + b  a: 기울기, b: 절편
+
+  x와 y의 상관관계 계수
+  -> 0에 가까울수록 상관도가 낮다
+
+  에러 : 예측값과 실제값의 차이
+  SSE(Squared Sum of Err) : 에러의 제곱값들의 합
