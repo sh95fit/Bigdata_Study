@@ -1,0 +1,66 @@
+20230315_Bigdata
+
+* scipy
+
+통계 검정
+ t-test
+- t-test 조건
+ : 각 샘플의 모집단은 normal distribution을 따른다
+ : 각 샘플의 모집단 분산은 같다
+
+ ex>
+ : 2개 그룹의 평균값 비교
+ : 귀무가설 - 2개 그룹의 평균값은 같다
+ : 유의수준 - 0.05 (변경 가능, 5%는 일반적인 기준)
+ 실행 방법
+ stats.ttest_ind(1그룹 데이터, 2그룹 데이터)
+ p-value값이 유의수준보다 작으면 희귀한 케이스
+ -> 즉, 귀무가설이 성립하지 않는다!
+     (2개 그룹의 평균값은 다르다)
+
+- scipy
+  홈페이지 : https://docs.scipy.org/
+  통계 관련 : https://docs.scipy.org/doc/scipy/reference/stats.html
+
+- 표준 정규분포(normal distribution) 검정
+  : shapiro, anderson, kstest
+
+   # shapiro 활용
+     - shapiro 귀무가설
+       : 샘플의 모집단의 정규분포를 따른다
+
+   # anderson 활용
+     - anderson 귀무가설
+       : 샘플의 모집단은 선택된 분포를 따른다. 
+         (anderson : 여러 가지 분포 선택 가능!)
+       : statistic 값이 선택된 significance_level의 
+         critical_value보다 크면 귀무가설 기각
+
+   # kstest 활용
+     - goodness of fit (선택된 분포와 일치하는지 검정)
+       : 귀무가설 : 선택된 분포와 데이터가 일치
+
+   # qqplot 활용
+     - 정규분포 분위수 대조도
+     - 정규 모집단을 가정하는 방법 중 하나
+     - 수집 데이터를 표준 정규분포의 분위수(Quantile)와 비교
+       * 분위수 :  데이터의 분포에서 전체 넓이를 일정 비로 나누어 
+                     위치에 있는 값
+
+
+- 분산 검정 (equal variance)
+  : bartlet, levene
+
+   # bartlett
+     - 귀무가설 : 2개 그룹의 varience(분산)은 같다
+
+   # levene
+     - 귀무가설 : 2개 그룹의 varience(분산)은 같다.
+     - 샘플이 normal distribution이 아닌 경우 사용
+
+
+
+
+
+
+
