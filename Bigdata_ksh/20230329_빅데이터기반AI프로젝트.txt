@@ -1,0 +1,53 @@
+20230329_Bigdata
+
+* 판다스 - DataFrame, Concatenate
+
+ - Dataframe 삭제
+  dataframe.drop([삭제할 인덱스1, ...], axis=1, inplace=True)
+   * inplace default 값은 False 
+   * axis default 값은 0
+   * inplace = True 시 return 값은 None (원본 값 변경)
+  
+  dataframe.dropna()
+   * NaN이 있는 경우 무조건 삭제 처리!
+   * inplace default 값은 False
+   * axis default 값은 0
+   * .dropna(inplace=True)
+
+  - .dropna(axis=1)
+
+  Tip! 
+  sorted()  --> copy
+  np.sort() --> inplace 
+
+
+
+ - Dataframe 추가(inplace)
+  1. dataframe.insert(인덱스 위치(숫자), 추가할 인덱스명, 추가할 Series)
+  2. dataframe['추가할 인덱스'] = 추가할 Series
+
+
+
+ - Dataframe Concat
+
+  - column을 추가하는 방법
+   pd.concat((튜플, 리스트 적용가능), join='inner')
+   * 기본값 : outer
+     양쪽에 값들을 모두 표시할 수 있는 영역
+   * join = 'inner'
+     둘다 값이 존재하는 영역
+
+  - row를 추가하는 방법
+   Series를 Dataframe으로 변경
+   series.to_frame()
+   행열 전환(row로 만들어줌!
+   series.to_frame().T
+   -> 최종적으로 concat 적용
+
+
+ - Dataframe은 pickle, csv로 저장 가능
+
+
+ Tip!
+  .apply(함수)   : 데이터프레임을 돌면서 함수를 적용
+
