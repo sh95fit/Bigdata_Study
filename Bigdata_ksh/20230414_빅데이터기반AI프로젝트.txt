@@ -1,0 +1,27 @@
+* 20230414_빅데이터기반AI프로젝트 강의
+
+ - seaborn
+
+ * 구성
+
+ - Figure level
+   relplot(relational)
+    - axe level
+      scatterplot
+    lineplot
+
+  displot(distributions)
+    - axe level
+    histplot
+    kdeplot
+    ecdfplot
+    rugplot
+  
+  catplot(categorical)
+    - axe level
+    stripplot
+    swarmplot
+    boxplot
+    violinplot
+    pointplot
+    barplot
