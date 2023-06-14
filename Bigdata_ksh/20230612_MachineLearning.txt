@@ -1,0 +1,1 @@
+20230612 Machine Learning* Deep Learing (Keras) - Keras Model, Layer  sigmoid : 폭주 현상으로 인해 최근에는 잘 사용하지 않는다!  -> 대체 activation이 relu이다  relu에서 조금더 발전된 형태  -> leakyrelu     (= keras.layers.ReLU(negative_slope=0.2))     (= keras.layers.LeakyReLU())  Regularization layers : 과적합 보완  -> Dropout layer를 주로 사용
