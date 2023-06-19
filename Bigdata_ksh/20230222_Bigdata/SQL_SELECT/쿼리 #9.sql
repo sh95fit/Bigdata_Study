@@ -1,1 +1,0 @@
-SELECT SUM(Total), AVG(Total), MAX(Total), MIN(Total), STDDEV(Total), COUNT(Total) FROM invoices;

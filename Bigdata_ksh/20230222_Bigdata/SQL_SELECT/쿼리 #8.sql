@@ -1,1 +1,0 @@
-SELECT count(genreid) FROM genres;

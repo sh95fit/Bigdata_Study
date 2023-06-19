@@ -1,1 +1,0 @@
-SELECT FirstName, LastName, Country FROM chinook.customers LIMIT 3 OFFSET 6;

@@ -1,1 +1,0 @@
-SELECT * FROM chinook.playlists LIMIT 10;

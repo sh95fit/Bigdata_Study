@@ -1,1 +1,0 @@
-SELECT Title, LastName, FirstName FROM chinook.employees LIMIT 5;
