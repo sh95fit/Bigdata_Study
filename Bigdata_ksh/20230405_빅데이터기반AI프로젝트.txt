@@ -1,0 +1,18 @@
+20230405 빅데이터기반AI프로젝트
+
+* category 타입 활용
+  - 커스터마이징 가능!
+  - CategoricalDtype 라이브러리 활용
+
+* 판다스 전처리 (이상치 처리)
+
+ - IQR (Inter Quantile Range)
+  -> 이상치 확인
+  -> .quantile(값 or 리스트) 으로 중앙값 확인
+ 
+  - 이상치 처리 
+   - iqr = qv[1] - qv[0]
+   - upper = qv[1] + 1.5*iqr
+   - lower = qv[0] - 1.5*iqr
+   - upper 보다 큰것, lower 보다 작은 것
+

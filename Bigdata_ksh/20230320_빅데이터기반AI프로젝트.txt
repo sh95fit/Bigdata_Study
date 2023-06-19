@@ -1,0 +1,18 @@
+20230320_Bigdata
+
+* statsmodels
+
+ 모델 생성 -> fit -> summary(), params로 확인
+ * 주의! constant를 통해 계산할 영역을 만들어줘야 계산
+          (add_constant)
+
+
+
+
+* 참고
+ - 95% confidence interval
+ 
+ - 표준편차 1, 평균값 0 기준
+   -1.96, 1.96이 0.025 area의 기준이 된다(95% 기준)
+
+

@@ -1,0 +1,24 @@
+20230525 MachineLearing 기초
+
+- Linear Regression
+ * scikit-learn
+  파이썬 대표 머신러닝 라이브러리
+
+ 회귀 (regression)
+ - 전달된 데이터를 바탕으로 값을 예상
+ - 종류
+  1. SGR (stochastic gradient descent)
+   : 대규모 (10만건 이상)의 경우 사용되는 선형 회귀 분석 방법
+  2. LASSO, ElasticNet
+   : 중소규모 (10만건 미만)의 경우 활용되며,
+     설명 변수의 일부가 중요한 경우 사용되는 선형 회귀 분석 방법
+  3. Ridge, Linear SVR
+   : 중소규모 (10만건 미만)의 경우 활용되며,
+     설명 변수의 전부가 중요한 경우 사용되는 선형 회귀 분석 방법
+  4. SVR (가우스 커넬), Ensemble
+   : Ridge 또는 Linear SVR로  분석이 되지 않는 경우 사용하는 비션형적 회귀 분석 방법
+
+
+ r2_score(y_true, y_pred)
+ : r^2(결정 계수) 회귀 점수 함수
+  최고 점수는 1.0이며 음수가 될 수 있다!

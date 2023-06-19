@@ -1,0 +1,21 @@
+20230531 MachineLearing 기초
+
+- 선형 모델
+ * independent variable 끼리는 상관도가 낮을수록 좋다!
+
+- Naive Bayes 
+ * 선형 모델은 아니다!
+   (데이터가 불균일한 경우 주로 활용된다)
+ * independent variable끼리 상관도가 없다는 가정하에 예측
+   즉, 독립적이라고 판단하고 예측 진행
+ * 분류기로 활용됨 (ex> 문서 분류, 스팸 메일 분류 등) 
+
+ * Bayes 
+  조건부 확률 P(A|B) = P(A n B)/P(B)
+                          = P(B|A)P(A) / (P(B|A)P(A)+(P(B|A^c)P(A^c))
+  underflow 방지
+  - P = exp(log(P)) = exp(log(P1)+log(P2)+log(P3) ...)
+  - log(ab) = log(a) + log(b)
+  - exp(log(x)) = x
+
+ * GaussianNB, BernoulliNB

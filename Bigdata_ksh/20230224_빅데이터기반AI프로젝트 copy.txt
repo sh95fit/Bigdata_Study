@@ -1,0 +1,105 @@
+20230224_Bigdata
+
+* Numpy (Scipy, Statmodels)
+
+jupyter notebook에서 설치
+- !pip install numpy
+
+파이썬 리스트를 통해 ndarray 만들기
+- numpy.array(리스트)
+
+for문 없이 범위만큼 출력
+- numpy.arange(범위값)		
+                   start, stop, interval  (실수값도 가능!)
+
+다양한 데이터 타입이 있는 경우 모두 한 타입으로 처리
+-> 즉 하나의 데이터 값만 처리!(균일 데이터만 가능)
+
+numpy에서는 리스트로 원하는 값을 인덱싱 할 수 있다!
+ex>
+['a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k']
+print(a4[[1,7,5]])
+>>> ['b' 'h' 'f']
+
+numpy의 경우 비교를 통해 불리언 값을 받아올 수 있음
+for문을 쓰지 않고 조건을 충족하는 값을 알 수 있다!
+ex> filter_1 = a4 > 'c'
+['a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k']
+print(filter_1)
+>>> [False False False  True  True  True  True  True  True  True  True]
+
+또한 조건에 충족하는 값들만 추출할 수 있다(True인 것만 가져와서 표시)
+print(a4[filter_1])
+>>> ['d' 'e' 'f' 'g' 'h' 'i' 'j' 'k']
+
+
+범위 사이에 특정 개수로 등분하는 방법
+* linspace는 시작값과 끝값 모두 포함된다!! (vs range, 리스트인덱싱, 끝값 미포함)
+- numpy.linspace(시작, 끝(범위에 포함!), 등분할 개수)
+
+0으로 채우고 싶은 경우
+- numpy.zeros(채울 0의 개수, dtype=numpy.데이터타입) 
+ -> 실수로 채워짐
+ -> 특정 데이터타입으로 채우고 싶은 경우
+    ex> dtype=numpy.int64 같은 형태로 뒤에 붙음
+
+1로 채우고 싶은 경우
+- numpy.ones(채울 1의 개수)
+
+
+만들어진 것의 데이터 타입을 변경하고 싶은 경우
+- [ndarray].astype(numpy.데이터타입)
+
+
+데이터 타입 확인
+- [ndarray].dtype
+
+
+차원 수를 알고 싶은 경우
+- [ndarray].ndim
+
+
+ndarray의 형태가 알고 싶은 경우(차원, 데이터 개수를 알 수 있음)
+- [ndarray].shape
+
+
+ndarray의 모든 요소 개수(총 elements 개수)
+- [ndarray].size
+
+
+** 주의! ndarray는 콤마(,)를 찍어주지 않음!
+
+
+파이썬의 리스트는 + 를 하는 경우 이어붙여 하나를 이룸
+-> But, Numpy의 경우 행렬 합 계산을 하게 된다!
+    이어 붙이는 함수가 별도로 존재
+    -> numpy.concatenate((ndarray1, ndarray2))   * 튜플형태로 넣어줘야한다!
+
+
+ndarray의 합
+-> sum(ndarray)	        # 파이썬 내장함수(built-in)
+-> ndarray.sum()           # ndarray method
+-> numpy.sum(ndarray)   # numpy function
+
+
+reshape을 통해 차원, 형태를 변경할 수 있음!
+-> ndarray.reshape(행,열)
+* reshape 시 사이즈가 반드시 맞아야 한다!
+  (사이즈 = 행*열 = 총 요소수)
+
+2차원 ndarray 인덱싱
+ndarray[[start row : stop row : interval],[start column : stop column : interval])
+
+ndarray[row]  : 특정 행 출력
+ndarray[시작row : 끝row] : 시작row~(끝row-1)의 행 출력
+ndarray[row,column] : 특정 값을 출력
+ndarray[:,3:6] : row 전체 중 3~5열에 해당하는 값들 가져오기
+
+2차원 ndarray 합
+np.sum(ndarray) : 모든 요소의 합
+np.sum(ndarray, axis=1) : 행별 합계
+np.sum(ndarray, axis=0) : 열별 합계
+
+2차원 ndarray  회전
+ndarray.T
+

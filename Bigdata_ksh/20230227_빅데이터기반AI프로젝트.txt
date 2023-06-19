@@ -1,0 +1,57 @@
+20230227_Bigdata
+
+* Numpy (Scipy, Statmodels)
+
+ - 2차원을 1차원으로 변환하는 방법
+ -> flatten, ravel
+
+ * flatten vs ravel
+ flatten으로 변환하는 경우 동일한 ndarray를 복사해 변환
+ -> 즉 원본과 무관한 ndarray
+     (한 쪽 값을 변경해도 다른 한쪽은 변경되지 않음)
+ ravel의 경우 원본을 변환
+ -> 즉 원본과 변환된 ndarray는 값을 공유
+     (한 쪽의 값을 변경하면 변경된 값을 공유함)
+
+ - concatenate은 2차원을 이어 붙이는 데에도 활용됨
+ -> 축을 활용해 2차원을 이어붙일 수 있음
+  default 값 == axis=0 (위-아래 방향으로 붙임)
+  axis = 1 (좌-우 방향으로 붙임)
+
+ -> axis=1 로 concatenate한 것과 동일한 함수
+  numpy.hstack(튜플)
+ -> axis=0 로 concatenate한 것과 동일한 함수
+  numpy.vstack(튜플)
+
+
+ - ndarray 자르기(-> split)
+ - hsplit : 수평 자르기
+ - vsplit : 수직 자르기
+
+
+-----------------------------------------------
+
+- 3차원 ndarray
+ 축 이동
+ -> numpy.moveaxis(ndarray, 기준점, 옮길 위치)
+
+ 축 추가
+ -> numpy.newaxis
+ = 차원 늘리기 
+   -> numpy.expand_dims(ndarray, 추가할 위치)
+
+
+------------------------------------------------
+
+ -------------------Axis 1 column (=Feature) (=Attribute) 
+ㅣ                         (column의 개수 : dimension, degree)
+ㅣ
+ㅣ
+ㅣ
+ㅣ
+ㅣ
+Axis0
+row (= sample) (= tuple)
+(row의 개수 : cardinality, Samples)
+
+

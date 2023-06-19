@@ -1,0 +1,4 @@
+SELECT * FROM chinook.playlists
+WHERE Name LIKE "M%"
+ORDER BY NAME DESC
+LIMIT 20;

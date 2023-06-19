@@ -1,0 +1,218 @@
+* Machine Learning
+ - 결정 = 비교 + 선택
+ - 독립변수(원인) / 종속변수(결과)
+ - 기계 학습의 종류
+  지도학습(분류, 회귀) / 비지도학습(군집화, 변환, 연관) / 강화학습
+ - 지도학습 vs 강화학습
+  지도학습은 어떤 결과를 도출하기 위한 학습이고, 강화학습은 더 좋은 결과를 도출할 수 있는 방법을 찾기 위한 학습이다
+  * 비지도학습은 새로운 의미나 관계를 밝혀내기 위한 학습
+
+ - 지도학습(역사 바탕)
+  과거의 데이터를 학습시켜 결과를 도출 (인과관계(원인-결과)가 있어야 한다!)
+  종류 : 분류(Classification), 회귀(Regression)
+  종속변수(결과) 값이 숫자일 때 보통 회귀 방식 활용
+  ex> 회귀(regression)
+      : 임의의 숫자를 분류하는 것 (연속적인 숫자 값으로 예측하는 것)
+        input을 통해 learning을 진행한 후 ask(test data)에 대한 예상 결과 값(predict)을 도출하는 방법이다
+  종속변수(결과) 값이 문자일 때 보통 분류 방식 활용
+
+ - 비지도학습(새로운 탐험 -> 데이터의 성격 파악)
+  종류 : 군집화(clustering), 변환(transform), 연관(association)
+  군집화(clustering) : 유사한 것을 찾아 그룹을 만드는 작업 (분류는 만들어진 그룹에 쌓는 작업)
+                          (비슷한 행들을 찾아 그룹핑하는 작업)
+                          관측치, 클러스터 수를 받아 클러스터를 만들어줌
+  연관(association) : = 연관 규칙 학습(Association rule learning)
+                         관련 있는 특성(열)을 찾아주는 학습 방법
+                         (즉, 관계가 있는 열을 찾아 그룹핑하는 작업)
+                         ex> 영화 추천, 재료 추천 등 추천 프로그램과 관련있다
+
+ - 강화학습
+  환경(environment)이 주어졌을 때 에이전트(agent)가 보상(reward), 상태(state)를 통해 더 나은 정책(policy)을 수립해 보다 나은 행동(action)을 끌어내는 학습이다
+
+
+
+
+
+ * k-최근접 이웃 회귀(kNN)
+  k-최근접 이웃 분류
+  - sample이 주어졌을 때 가장 인접한 위치에 클래스(그룹)을 sample의 클래스로 지정하는 방식이다
+   ex> 인접한 위치에 x 클래스 개수가 2개, y 클래스 개수가 1개인 경우 x 클래스를 채택하여 분류
+  k-최근접 이웃 회귀
+  - 가까운 클래스를 찾는 것까지는 동일하고 거기서 target 값을 잡아 평균값을 적용해 예측치를 산정하는 방식
+   ex> 인접한 위치의 값이 100, 80, 60인 경우 평균값인 80을 예측값로 잡는다
+  * 회귀 방식에서는 train_test_split의 straticfy 속성을 사용하지 않는다!
+  * sklearn.neighbors의 kNeighborsRegressor 함수 사용
+  * 과대적합과 과소적합
+   일반적으로 train score가 test score보다 조금 높게 나오는게 정상
+   과소적합(underfitting) : train score < test score
+   과대적합(overfitting) : train score >> test score 
+  * 적합 조정 방법
+    이웃의 개수(n_neighbors)를 늘리면 -> 과소 적합
+    이웃의 개수(n_neighbors)를 줄이면 -> 과대 적합
+
+
+* 선형 회귀 (Linear Regression)
+ - k-최근접 이웃 회귀의 경우 범위가 제한되어 일정 범위가 넘어가면 일정 동일한 값을 띄우기 되는 문제가 발생한다
+  이를 해결하기 위해 추세를 따라가도록 분석하는 모델인 선형 회귀 모델을 도입한다
+  * sklearn.linear_model의 LinearRegression 함수 사용
+  * 기울기(a)와 절편(b)를 구해내는 절차를 통해 추세선을 도출함
+  * 기울기 = .coef_와 절편 = .intercept_로 바로 도출할 수 있음
+   ex> y = .coef_ * x + .intercept_
+  * 적합 조정 방법
+    다항 회귀 활용(선형을 조금더 유한 곡선형으로 만들기 위함(1차함수 -> 2차함수))
+    - 활용 : train_poly = np.column_stack((train_input**2, train_input)) 형태로 다항식을 만들어 낸다
+              모델 적용 시 m.fit(train_poly, train_target)
+              * 이 때 계수는 .coef_ 에서 0,0 위치 값을 x^2의 계수, 0,1 위치 값을 x의 계수로 활용  (.intercept_는 그대로 절편으로 적용)
+  *  특성 공학과 규제
+    - 특성 변경, 조합과 같은 작업을 특성 공학이라고 한다
+    - 다항 특성 만들기
+     * sklearn.preprocessing import PolynomialFeatures 활용 (degree를 통해 차원 선택)
+    - 과대적합을 줄이는 방법 => 규제(regularization, =정규화)
+      가중치(기울기) 값을 줄여 일반화된 값을 구해내는 과정이다(즉, 가중치를 줄이는 작업이 규제이다)
+      LinearRegression의 경우 스케일에 영향을 받지 않아 특성값을 그대로 사용해도 된다!
+      But, 규제를 적용할 경우 스케일 조정을 해야한다!(특성의 스케일을 비슷하게 해야 가중치(기울기)를 낮출 수 있으므로!)
+      스케일 조정 -> sklearn.preprocessing의 StandardScalar 활용
+ 
+  * 규제가 적용된 모델  
+   - 릿지 회귀(sklearn.linear_model의 ridge)
+     규제 : 가중치의 제곱(L2) 규제를 활용
+     규제 강도 : alpha 매개변수를 크게 할수록 강한 규제가 적용된다(default = 1)
+     규제 강도가 낮을 경우 과대적합, 규제 강도가 클 경우 과소적합된다
+   - 라쏘 회귀(sklearn.linear_model의 Lasso)
+     규제 : 가중치의 절댓값(L1) 규제를 활용
+     규제 강도 : alpha 매개변수를 크게 할수록 강한 규제가 적용된다(default = 1)
+
+
+* 로지스틱 회귀 (Logistic Regression)
+  * 관련 : 시그모이드 함수(tanh 함수)
+  분류 모델에서 확률을 가져와 회귀 모델에 적용
+  인공신경망의 기초가 되는 모델!
+  순서1. k-최근접 이웃 다중 분류를 통해 클래스에 대한 확률을 구한다 (.classes_로 클래스 확인)
+          LogisticRegression 함수 활용(max_iter를 적절히 적용해주어야 한다! 기본적으로 L2 norm 규제 기본 적용(C 매개변수로 규제 강도 조정(C가 낮을수록 규제 강도가 강하다))
+  순서2. .predict와 .predict_proba를 통해 확률을 출력해서 확인할 수 있다
+          (.predict는 z값을 활용하고, .predict_proba는 파이값을 계산해서 평균값 추적)
+  순서3. 로지스틱 회귀 계수 확인 (.coef_, .intercept_)
+  ----------------------------------------------------------------------------------------------------------
+  * predict_proba의 양성 분류 값과 동일하게 구할 수 있음
+   순서1. decision_function 활용 => z값을 구해내는 함수 
+   순서2. 이진 분류 시 scipy.special의 expit을 통해 시그모이드 함수 활용 가능! (시그모이드 함수에 z값을 넣어 도출)
+            다중 분류 시 scipy.special의 softmax를 통해 지수 함수 활용 가능! (지수 함수에 z값을 넣어 도출)
+  ----------------------------------------------------------------------------------------------------------
+  
+
+* 확률적 경사 하강법(Stochastic Gradient Descent = SGD)
+  가중치와 절편을 유지하면서 데이터를 업데이트 하는 방법 -> 점진적 학습, 온라인 학습
+  알고리즘을 훈련시키는 방법(최적화하는 방법)으로 자체적으로 머신러닝 알고리즘은 아니다!
+  훈련세트(1회 훈련 루틴) = 에포크(epoch)
+
+  샘플을 1개씩 꺼내서 적용 => 확률적 경사 하강법
+  샘플을 2의 배수로 꺼내서 적용 => 미니 배치 경사 하강법
+  샘플을 전부 꺼내서 적용 => 배치 경사 하강법
+
+  * 손실 함수
+   머신러닝 알고리즘이 얼마나 나쁜지 정도를 판단하는 함수
+   손실 함수의 값이 낮을수록 좋은 알고리즘이다!
+   * 회귀는 평균 절댓값, 평균 제곱값 오차 => 미분이 가능하므로 손실함수 적용 가능! (성능지표와 손실함수를 함께 쓸 수 있다!) ex> MSE(가중치 활용) 성능, 손실 측정 가능
+   * 분류의 경우 정확도로 성능을 높이기 위해 로지스틱 손실 함수로 최적화
+    예측값과 타깃값이 맞는지 틀린지만 판단! (연속적이지 못하므로 적용할 수 없음 => 성능지표와 손실함수를 같이 쓸 수 없다!)
+    -> 정확도는 미분이 불가능하다!  즉 다른 손실함수가 필요!
+     => 로지스틱 손실 함수(= 이진 크로스 엔트로피 손실 함수) 적용 정확도를 판단하는 척도로 활용
+
+  SGDClassifier 활용 (SGDRegressor도 있음!)
+  SGDClassifier(loss='log', max_iter=10   # log = 로지스틱함수 / max_iter = 에포크
+
+  fit : 이전에 학습했던 가중치, 절편을 버리고 새로 적용
+  partial_fit : 이전에 학습했던 가중치, 절편 유지하면서 다시 한번 더 적용 (클래스 매개변수가 추가됨 => 클래스 목록 전달)
+
+  에포크를 많이 적용하면 과대적합이 될 수 있고 에포크를 너무 적게 적용하면 과소적합이 될 수 있다 (적정값 설정이 중요! => 조기 종료)
+
+
+* 결정 트리 (Decision Tree)
+  sklearn.tree의 DecisionTreeClassifier 활용 (분류)   회귀모델 DecisionTreeRegression
+  모든 leaf 노드가 순수노드가 될 때까지의 depth까지 진행!
+  plot_tree를 통해 어떻게 분기되어 있는지를 시각화하여 볼 수 있음 (속성 중 filled=True를 통해 양성, 음성 색상 구분이 가능)
+  criterion 기본 값 = 'gini'
+  지니 불순도 = 1 - (음성클래스비율^2 + 양성클래스비율^2)  (순수노드 = 지니불순도가 0인 노드, 가장 불순도가 높은 노드 = 지니불순도가 0.5인 노드)
+  부모의 불순도 - 자식의 불순도가 가장 큰 쪽 노드로 진행
+  너무 많은 depth로 진행될 경우 과대적합이 될 수 있어 조절이 필요
+  => 가지치기
+     max_depth를 제한
+  스케일을 조정하지 않고 사용할 수 있다는 점이 가장 큰 장점! (전처리가 불필요)
+
+  
+* 교차 검증 
+  폴드를 나눠 각 케이스별 모델 훈련을 시켜 결과를 산출한 후 평균 검증 점수를 구해나는 방법이 교차 검증이다
+  sklearn.model_selection의 cross_validate 활용 (default : 5 폴드)
+  (효율이 상대적으로 떨어진다! 폴드를 쪼개어 경우의 수만큼 동일 과정을 반복하여야 함!)
+  fit_time, score_time, test_score을 출력하며 test_score를 평균을 내 검증 점수를 확인한다
+
+  검증 세트를 분리하는 방법
+  train_test_split으로 원본 데이터, 타겟을 적용한 다음 train_input과 test_input을 다시 train_test_split에 적용하여 다시 데이터, 타겟을 만들어 검증을 하는 방법
+  test_size를 지정해 검증 set을 정할 수 있다
+  => but 데이터 양이 적은 경우 검증 셋을 쪼갤 경우 정확한 검증이 어렵다!
+      따라서 교차 검증을 통해 검증 셋 그룹을 변경해가며 검증을 진행하여 결론을 도출한다
+
+  분할기(splitter)를 활용한 교차 검증
+  분류 모델의 경우 sklearn.model_selection의 StratifiedKFold 활용  (회귀 모델의 경우 KFold)
+
+* 그리드 서치
+ 여러 개의 매개변수를 통해 cross_validate를 변경해가며 테스트 진행
+ 보통의 작업은 그리드 서치를 거쳐 모델을 적용하는 형태로 진행된다
+ sklearn.model_selection의 GridSearchCV 활용
+ params를 통해 부모노드와 자식노드의 불순도 차이(min_impurity_decrease)를 반영 (불순도 차이(=정보 이득)가 클수록 좋다! )
+ -> 가지치기의 일환으로 사용!
+ ex> params = {'min_impurity_decrease' : [0.0001, 0.0002, 0.0003, 0.0004, 0.0005]}	# max_dept, min_samples-split, min_samples_leaf 등 값을 지정해줄 수 있다!
+      gs = GridSearchCV(DecisionTreeClassifier(), params, n_jobs=-1)
+      gs.fit(train_input, train_target)
+      dt = gs.best_estimator_		최적의 set을 적용
+      gs.best_params_를 통해 min_impurity_decrease가 어떤 값이 적용되었는지 확인
+      gs.cv_results_를 통해 mean_best_score 값을 확인
+
+
+* 확률 분포 선택
+  scipy.stats의 uniform, randint 활용 (균등 분포 샘플링)
+  -> 랜덤 서치 (sklearn.model_selection의 RandomizedSearchCV 활용)
+
+
+* 트리의 앙상블
+
+  정형 데이터(ML) vs 비정형 데이터(DL)
+  정형 데이터 : DB, Excel, CSV  -> 전처리(특성공학 적용)
+  비정형 데이터 : 텍스트, 오디오, 이미지, 영상 -> 표현 학습
+
+  => 랜덤 포레스트(RandomForestClassifier, RandomForestRegressor)
+   결정 트리를 앙상블 하는 것이 가장 효과적이다!
+   결정 트리를 랜덤하게 만들어 적용 (부트스트랩 샘플을 사용해 과대적합을 억제하는 것이 특징)
+   훈련 세트 -> 랜덤 샘플링(중복을 허용한 샘플링) -> 부트스트랩 샘플(과대적합 억제) -> 결정 트리 훈련 (확률 = 클래스별 확률 합 / 트리 개수) (예측 = 클래스별 예측 / 트리 개수)
+   결정 트리를 훈련할 때 불순도를 크게 만들어야 좋다!
+   -> 특성개수의 루트값 만큼 랜덤하게 선택 -> 최선의 분할 선택  (모든 노드를 만들 때 이러한 과정을 반복한다!)
+   sklearn.ensemble의 RandomForestClassifier 활용
+   결정 트리에 적용되고 남는 샘플(OOB) 또한 전부 랜덤하므로 검증세트 성능 평가 가능!  => oob_score=True 설정
+   -> .oob_score_를 통해 점수 확인
+
+  엑스트라 트리
+  결정 트리의 노드를 랜덤하게 분할하는 방식
+  sklearn.ensemble의 ExtraTreesClassifier 활용
+  부트스트랩 샘플을 사용하지 않는다! 전체 샘플 사용
+  다른 방식으로 과대적합을 억제! => 특성을 랜덤하게 분할하여 가장 높은 불순도 내는 셋을 선택
+  장점 : 랜덤하게 분할하여 적용하므로 속도가 빠른다!
+
+  그레디언트 부스팅
+  이진 트리의 손실을 보완하는 방식으로 얕은 결정트리를 연속하여 추가하는 방식
+  sklearn.ensemble의 GradientBoostingClassifier 활용
+  로지스틱 손실함수(분류), 평균제곱오차(회귀)를 통해 얻은 실수 값을 낮추는 트리를 추가하는 방식
+  learning_rate를 통해 학습 속도를 적절하게 조정
+  n_estimators를 늘려 트리 개수를 증가시켜가면서 검증 진행
+
+  히스토그램 기반 그레디언트 부스팅
+  훈련 데이터를 256개의 정수 구간으로 나누어 빠르고 높은 성능을 낸다
+  sklearn.experimental의 enable_hist_gradient_boosting과 sklearn.ensemble의 HistGradientBoostingClassifier 활용
+  (enable_hist_gradient_boosting을 선언해야 HistGradientBoostingClassifier 활용 가능)
+
+  Permutation Importance 
+  sklearn.inspection의 permutation_importance 활용
+  샘플을 섞어 성능을 체크하여 original 성능을 개선한다
+
+  XGBoost vs LightGBM
+  xgboost의 XGBClassifier / lightgbm의 LGBMClassifier 활용
+  히스토그램 기반 그레디언트 부스팅 지원

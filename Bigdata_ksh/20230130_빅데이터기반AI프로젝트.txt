@@ -1,0 +1,19 @@
+20230130_Bigdata
+
+* jupyter notebook 배치파일 생성 및 간편 실행
+ - .bat 파일 생성
+ - 편집 - 'jupyter notebook' 입력 및 저장
+ - 관리자 권한 실행
+
+
+* 연습문제 추천 사이트
+ - Project Euler
+
+
+* 파이썬 ref 참조 사이트
+ - https://docs.python.org/3/library/index.html
+
+
+* 파이썬 설치 경로 내(Lib 폴더) 모듈 확인
+
+ - C:\Users\[PC이름]\AppData\Local\Programs\Python\Python310\Lib
