@@ -3,3 +3,4 @@ kaggle
 venv
 Bigdata_Analytics/Practice/Solar_Analytics/rnd_data
 Bigdata_Analytics/Practice/Solar_Analytics/solar_data
+*.csv
